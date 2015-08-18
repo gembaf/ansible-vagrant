@@ -12,8 +12,9 @@
   ignore_errors: yes
 
 - name: clone git
-  command:
-    git clone https://github.com/git/git.git /usr/local/src/git
+  git: repo=https://github.com/git/git.git
+       dest=/usr/local/src/git
+       version=v2.5.0
   when: exist_check|failed
 
 - name: uninstall old version git
