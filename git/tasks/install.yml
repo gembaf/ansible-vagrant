@@ -1,0 +1,26 @@
+# vim:ft=ansible:
+
+---
+- name: install dependent packages
+  command: apt-get -y install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
+
+- name: install old version git
+  command: apt-get -y install git
+
+- shell: ls /usr/local/src/git
+  register: exist_check
+  ignore_errors: yes
+
+- name: clone git
+  command:
+    git clone https://github.com/git/git.git /usr/local/src/git
+  when: exist_check|failed
+
+- name: uninstall old version git
+  command: apt-get -y remove git
+
+- name: compile & install
+  shell:
+    chdir=/usr/local/src/git
+    make prefix=/usr/local all && make prefix=/usr/local install
+
