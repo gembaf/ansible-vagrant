@@ -1,0 +1,18 @@
+# vim:ft=ansible:
+
+---
+- shell: ls /usr/local/src/zsh
+  register: exist_check
+  ignore_errors: yes
+
+- name: clone zsh
+  git: repo=https://github.com/zsh-users/zsh.git
+       dest=/usr/local/src/zsh
+       version=zsh-5.0.8
+  when: exist_check|failed
+
+- name: compile & install
+  shell:
+    chdir=/usr/local/src/zsh
+    ./Util/preconfig && ./configure && make && make install.bin
+

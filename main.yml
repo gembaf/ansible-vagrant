@@ -8,4 +8,5 @@
     - include: apt/apt.yml
     - include: git/git.yml
     - include: ruby/ruby.yml
+    - include: zsh/zsh.yml
 
