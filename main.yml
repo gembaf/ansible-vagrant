@@ -9,4 +9,5 @@
     - include: git/git.yml
     - include: ruby/ruby.yml
     - include: zsh/zsh.yml
+    - include: vim/vim.yml
 

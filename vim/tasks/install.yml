@@ -1,0 +1,21 @@
+# vim:ft=ansible:
+
+---
+- shell: ls /usr/local/src/vim
+  register: exist_check
+  ignore_errors: yes
+
+- name: clone vim
+  git: repo=https://github.com/vim/vim.git
+       dest=/usr/local/src/vim
+       version=v7.4.827
+  when: exist_check|failed
+
+- name: compile & install
+  shell:
+    chdir=/usr/local/src/vim
+    ./configure --disable-gui && make && make install
+
+- name: uninstall old version vim
+  command: apt-get -y remove vim
+
