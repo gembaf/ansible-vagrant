@@ -1,0 +1,9 @@
+# vim:ft=ansible:
+
+---
+- name: gem update
+  command: gem update --force --no-ri --no-rdoc
+
+- name: install rails
+  command: gem install rails --no-ri --no-rdoc
+

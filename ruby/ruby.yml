@@ -8,3 +8,5 @@
 - include: tasks/install.yml
   when: version_check|failed
 
+- include: tasks/gem.yml
+
