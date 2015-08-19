@@ -1,9 +1,12 @@
 # vim:ft=ansible:
 
 ---
+- name: install dependent packages
+  command: apt-get -y install libsqlite3-dev
+
 - name: gem update
   command: gem update --force --no-ri --no-rdoc
 
 - name: install rails
-  command: gem install rails --no-ri --no-rdoc
+  command: gem install rails sqlite3 --no-ri --no-rdoc
 
