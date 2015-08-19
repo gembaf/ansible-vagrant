@@ -6,4 +6,6 @@
   gather_facts: no
   tasks:
     - include: apt/apt.yml
+    - include: git/git.yml
+    - include: ruby/ruby.yml
 

@@ -1,0 +1,10 @@
+# vim:ft=ansible:
+
+---
+- shell: ruby --version | grep 2.2.2
+  register: version_check
+  ignore_errors: yes
+
+- include: tasks/install.yml
+  when: version_check|failed
+
