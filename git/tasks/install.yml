@@ -16,13 +16,13 @@
   register: exist_check
   ignore_errors: yes
 
-- name: clone git
+- name: git clone
   git: repo=https://github.com/git/git.git
        dest=/usr/local/src/git
        version=v2.5.0
   when: exist_check|failed
 
-- name: uninstall old version git
+- name: uninstall old version
   apt: name={{ item }} state=absent
   with_items:
     - git

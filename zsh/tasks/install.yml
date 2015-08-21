@@ -6,7 +6,7 @@
   register: exist_check
   ignore_errors: yes
 
-- name: clone zsh
+- name: git clone
   git: repo=https://github.com/zsh-users/zsh.git
        dest=/usr/local/src/zsh
        version=zsh-5.0.8

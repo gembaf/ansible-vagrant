@@ -6,7 +6,7 @@
   register: exist_check
   ignore_errors: yes
 
-- name: clone vim
+- name: git clone
   git: repo=https://github.com/vim/vim.git
        dest=/usr/local/src/vim
        version=v7.4.827
@@ -17,7 +17,7 @@
     chdir=/usr/local/src/vim
     ./configure --disable-gui && make && make install
 
-- name: uninstall old version vim
+- name: uninstall old version
   apt: name={{ item }} state=absent
   with_items:
     - vim
