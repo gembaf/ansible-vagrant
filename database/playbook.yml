@@ -4,6 +4,7 @@
 - name: install postgresql
   apt: name={{ item }} state=present
   with_items:
+    - libpq-dev
     - postgresql  # 9.3.9
 
 - name: restarted postgresql
