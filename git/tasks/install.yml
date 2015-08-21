@@ -9,7 +9,6 @@
     - gettext
     - libz-dev
     - libssl-dev
-    - git
 
 - name: exist check
   shell: test -e /usr/local/src/git

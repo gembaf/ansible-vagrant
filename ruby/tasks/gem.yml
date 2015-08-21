@@ -5,7 +5,6 @@
   apt: name={{ item }} state=present
   with_items:
     - libsqlite3-dev
-    - g++
 
 - name: gem update
   command: gem update --force --no-ri --no-rdoc
