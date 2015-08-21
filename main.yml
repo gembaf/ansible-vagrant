@@ -5,9 +5,9 @@
   sudo: yes
   gather_facts: no
   tasks:
-    - include: apt/apt.yml
-    - include: git/git.yml
-    - include: ruby/ruby.yml
-    - include: zsh/zsh.yml
-    - include: vim/vim.yml
+    - include: apt/playbook.yml
+    - include: git/playbook.yml
+    - include: ruby/playbook.yml
+    - include: zsh/playbook.yml
+    - include: vim/playbook.yml
 
