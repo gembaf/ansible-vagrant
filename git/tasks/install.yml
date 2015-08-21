@@ -7,7 +7,8 @@
 - name: install old version git
   command: apt-get -y install git
 
-- shell: ls /usr/local/src/git
+- name: exist check
+  shell: test -e /usr/local/src/git
   register: exist_check
   ignore_errors: yes
 

@@ -4,7 +4,8 @@
 - name: install dependent packages
   command: apt-get -y install libssl-dev zlib1g-dev libreadline6-dev libffi-dev bison autoconf
 
-- shell: ls /usr/local/src/ruby
+- name: exist check
+  shell: test -e /usr/local/src/ruby
   register: exist_check
   ignore_errors: yes
 

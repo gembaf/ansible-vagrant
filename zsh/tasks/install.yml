@@ -1,7 +1,8 @@
 # vim:ft=ansible:
 
 ---
-- shell: ls /usr/local/src/zsh
+- name: exist check
+  shell: test -e /usr/local/src/zsh
   register: exist_check
   ignore_errors: yes
 
