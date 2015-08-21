@@ -12,6 +12,6 @@
 - name: install rails
   command: gem install {{ item }} --no-ri --no-rdoc
   with_items:
-    - rails
+    - rails    # 4.2.3
     - sqlite3
 
