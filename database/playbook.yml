@@ -14,3 +14,19 @@
     state=restarted
     enabled=yes
 
+- name: create user
+  postgresql_user:
+    name: vagrant
+    role_attr_flags: CREATEDB
+    state: present
+    login_user: postgres
+  sudo_user: postgres
+
+- name: create database
+  postgresql_db:
+    name: vagrant
+    owner: vagrant
+    encoding: 'UTF-8'
+    login_user: postgres
+  sudo_user: postgres
+
