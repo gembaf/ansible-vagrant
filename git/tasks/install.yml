@@ -4,11 +4,11 @@
 - name: install dependent packages
   apt: name={{ item }} state=present
   with_items:
+    - gettext
     - libcurl4-gnutls-dev
     - libexpat1-dev
-    - gettext
-    - libz-dev
     - libssl-dev
+    - libz-dev
 
 - name: exist check
   shell: test -e /usr/local/src/git

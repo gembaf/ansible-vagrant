@@ -4,12 +4,12 @@
 - name: install dependent packages
   apt: name={{ item }} state=present
   with_items:
+    - autoconf
+    - bison
+    - libffi-dev
+    - libreadline6-dev
     - libssl-dev
     - zlib1g-dev
-    - libreadline6-dev
-    - libffi-dev
-    - bison
-    - autoconf
 
 - name: exist check
   shell: test -e /usr/local/src/ruby
