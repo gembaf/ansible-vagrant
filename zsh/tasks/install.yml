@@ -14,5 +14,5 @@
 - name: compile & install
   shell:
     chdir=/usr/local/src/zsh
-    ./Util/preconfig && ./configure && make && make install.bin
+    ./Util/preconfig && ./configure && make && make install.bin && make install.modules && make install.fns
 
