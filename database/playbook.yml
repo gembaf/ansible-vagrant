@@ -6,6 +6,7 @@
   with_items:
     - libpq-dev
     - postgresql  # 9.3.9
+    - python-psycopg2
 
 - name: restarted postgresql
   service:
