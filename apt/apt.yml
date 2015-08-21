@@ -13,5 +13,5 @@
   command: apt-get -y clean
 
 - name: install base package
-  command: apt-get -y language-pack-ja-base postgresql
+  command: apt-get -y install language-pack-ja-base postgresql
 
