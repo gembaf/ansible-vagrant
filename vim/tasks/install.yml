@@ -15,7 +15,9 @@
 - name: compile & install
   shell:
     chdir=/usr/local/src/vim
-    ./configure --disable-gui && make && make install
+    ./configure --disable-gui
+      && make
+      && make install
 
 - name: uninstall old version
   apt: name={{ item }} state=absent

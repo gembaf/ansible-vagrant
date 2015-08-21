@@ -30,5 +30,6 @@
 - name: compile & install
   shell:
     chdir=/usr/local/src/git
-    make prefix=/usr/local all && make prefix=/usr/local install
+    make prefix=/usr/local all
+      && make prefix=/usr/local install
 

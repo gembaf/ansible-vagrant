@@ -25,7 +25,10 @@
 - name: compile & install
   shell:
     chdir=/usr/local/src/ruby
-    autoconf && ./configure && make && make install
+    autoconf
+      && ./configure
+      && make
+      && make install
 
 - name: uninstall old version
   apt: name={{ item }} state=absent
