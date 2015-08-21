@@ -18,5 +18,7 @@
     ./configure --disable-gui && make && make install
 
 - name: uninstall old version vim
-  command: apt-get -y remove vim
+  apt: name={{ item }} state=absent
+  with_items:
+    - vim
 

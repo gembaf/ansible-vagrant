@@ -2,7 +2,14 @@
 
 ---
 - name: install dependent packages
-  command: apt-get -y install libssl-dev zlib1g-dev libreadline6-dev libffi-dev bison autoconf
+  apt: name={{ item }} state=present
+  with_items:
+    - libssl-dev
+    - zlib1g-dev
+    - libreadline6-dev
+    - libffi-dev
+    - bison
+    - autoconf
 
 - name: exist check
   shell: test -e /usr/local/src/ruby
@@ -21,5 +28,7 @@
     autoconf && ./configure && make && make install
 
 - name: uninstall old version ruby
-  command: apt-get -y remove ruby
+  apt: name={{ item }} state=absent
+  with_items:
+    - ruby
 

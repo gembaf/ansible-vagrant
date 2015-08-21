@@ -2,11 +2,17 @@
 
 ---
 - name: install dependent packages
-  command: apt-get -y install libsqlite3-dev g++
+  apt: name={{ item }} state=present
+  with_items:
+    - libsqlite3-dev
+    - g++
 
 - name: gem update
   command: gem update --force --no-ri --no-rdoc
 
 - name: install rails
-  command: gem install rails sqlite3 --no-ri --no-rdoc
+  command: gem install {{ item }} --no-ri --no-rdoc
+  with_items:
+    - rails
+    - sqlite3
 

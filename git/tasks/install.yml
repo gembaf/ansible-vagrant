@@ -2,10 +2,14 @@
 
 ---
 - name: install dependent packages
-  command: apt-get -y install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
-
-- name: install old version git
-  command: apt-get -y install git
+  apt: name={{ item }} state=present
+  with_items:
+    - libcurl4-gnutls-dev
+    - libexpat1-dev
+    - gettext
+    - libz-dev
+    - libssl-dev
+    - git
 
 - name: exist check
   shell: test -e /usr/local/src/git
@@ -19,7 +23,9 @@
   when: exist_check|failed
 
 - name: uninstall old version git
-  command: apt-get -y remove git
+  apt: name={{ item }} state=absent
+  with_items:
+    - git
 
 - name: compile & install
   shell:

@@ -13,5 +13,8 @@
   command: apt-get -y clean
 
 - name: install base package
-  command: apt-get -y install language-pack-ja-base postgresql
+  apt: name={{ item }} state=present
+  with_items:
+    - language-pack-ja-base
+    - postgresql              # 9.3.9
 
