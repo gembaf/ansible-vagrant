@@ -1,0 +1,35 @@
+# vim:ft=ansible:
+
+---
+- name: install rbenv
+  git:
+    repo="https://github.com/sstephenson/rbenv.git"
+    dest=/usr/local/rbenv
+    version=v0.4.0
+
+- name: install ruby-build
+  git:
+    repo="https://github.com/sstephenson/ruby-build.git"
+    dest=/usr/local/rbenv/plugins/ruby-build
+    version=v20150818
+
+- name: create directory
+  file: path=/usr/local/rbenv/{{ item }} state=directory
+  with_items:
+    - shims
+    - versions
+
+- name: export path
+  shell:
+    echo 'export RBENV_ROOT=/usr/local/rbenv' > /etc/profile.d/rbenv.sh
+    && echo 'export PATH=$RBENV_ROOT/bin:$PATH' >> /etc/profile.d/rbenv.sh
+    && echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
+    && bash /etc/profile.d/rbenv.sh
+
+- name: setup rbenv
+  command:
+    bash -lc 'CONFIGURE_OPTS='--disable-install-rdoc' rbenv install 2.2.2'
+    && bash -lc 'rbenv global 2.2.2'
+    && bash -lc 'exec gem install bundler'
+    && bash -lc 'rbenv rehash'
+
