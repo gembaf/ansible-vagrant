@@ -8,6 +8,7 @@
     - include: apt/playbook.yml
     - include: database/playbook.yml
     - include: git/playbook.yml
+    - include: redis/playbook.yml
     - include: ruby/playbook.yml
     - include: vim/playbook.yml
     - include: zsh/playbook.yml
