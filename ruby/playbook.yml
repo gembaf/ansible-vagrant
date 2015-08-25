@@ -9,11 +9,5 @@
   when: version_check|failed
 
 - include: tasks/gem.yml
-
-- shell: bash -lc 'rbenv --version' | grep 0.4.0
-  register: rbenv_version_check
-  ignore_errors: yes
-
 - include: tasks/rbenv.yml
-  when: rbenv_version_check|failed
 
