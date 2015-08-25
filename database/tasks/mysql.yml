@@ -32,7 +32,7 @@
   mysql_user:
     name=vagrant
     password=
-    priv=*vagrant.*:ALL
+    priv=*.*:ALL
     state=present
 
 - name: create database
