@@ -18,4 +18,5 @@
     - g++
     - git
     - language-pack-ja-base
+    - cflow
 
