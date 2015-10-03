@@ -9,6 +9,7 @@
   when: version_check|failed
 
 - include: tasks/gem.yml
+- include: tasks/phantomjs.yml
 - include: tasks/rbenv.yml
 - include: tasks/rmagick.yml
 
