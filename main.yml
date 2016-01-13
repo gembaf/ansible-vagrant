@@ -6,7 +6,11 @@
   gather_facts: no
   tasks:
     - include: apt/playbook.yml
-    - include: database/playbook.yml
+
+    - include: database/all.yml
+    # - include: database/postgresql/postgresql.yml
+    # - include: database/mysql/mysql.yml
+
     - include: git/playbook.yml
     - include: redis/playbook.yml
     - include: ruby/playbook.yml
