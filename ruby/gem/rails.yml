@@ -1,0 +1,18 @@
+# vim:ft=ansible:
+
+---
+- name: (rails) install dependent packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libsqlite3-dev
+
+- name: (rails) install
+  shell: gem install {{ item }} --no-ri --no-rdoc
+  with_items:
+    - rails    # 4.2.3
+    - sqlite3
+
+- include: rails/phantomjs.yml
+

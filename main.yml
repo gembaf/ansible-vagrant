@@ -15,7 +15,12 @@
 
     - include: redis/redis.yml
 
-    - include: ruby/playbook.yml
+    - include: ruby/ruby.yml
+    - include: ruby/gem/all.yml
+    # - include: ruby/gem/base.yml
+    # - include: ruby/gem/rails.yml
+    # - include: ruby/gem/rmagick.yml
+
     - include: vim/playbook.yml
     - include: zsh/playbook.yml
 

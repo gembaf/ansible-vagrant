@@ -1,0 +1,10 @@
+# vim:ft=ansible:
+
+---
+- name: (gem) update
+  command: gem update --force --no-ri --no-rdoc
+
+# - name: (gem) install base package
+#   command: gem install {{ item }} --no-ri --no-rdoc
+#   with_items:
+

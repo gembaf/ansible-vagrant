@@ -1,0 +1,7 @@
+# vim:ft=ansible:
+
+---
+- include: base.yml
+- include: rails.yml
+- include: rmagick.yml
+

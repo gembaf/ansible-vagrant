@@ -1,0 +1,58 @@
+# vim:ft=ansible:
+
+---
+- name: (ruby) install dependent packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - autoconf
+    - bison
+    - libffi-dev
+    - libreadline6-dev
+    - libssl-dev
+    - zlib1g-dev
+
+- name: (ruby) exist check
+  shell: test -e /usr/local/src/ruby
+  register: exist_check
+  ignore_errors: yes
+
+- name: (ruby) git clone
+  git:
+    repo: 'https://github.com/ruby/ruby.git'
+    dest: /usr/local/src/ruby
+    version: v2_2_2
+  when: exist_check|failed
+
+- name: (ruby) version check
+  shell: ruby --version | grep 2.2.2
+  register: version_check
+  ignore_errors: yes
+
+- name: (ruby) configure
+  shell: autoconf
+         && ./configure --disable-install-doc
+  args:
+    chdir: /usr/local/src/ruby
+  when: version_check|failed
+
+- name: (ruby) make
+  shell: make
+  args:
+    chdir: /usr/local/src/ruby
+  when: version_check|failed
+
+- name: (ruby) make install
+  shell: make install
+  args:
+    chdir: /usr/local/src/ruby
+  when: version_check|failed
+
+- name: (ruby) uninstall old version
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - ruby
+
