@@ -20,6 +20,8 @@
     # - include: ruby/gem/rails.yml
     # - include: ruby/gem/rmagick.yml
 
+    # - include: rbenv/rbenv.yml
+
     - include: vim/vim.yml
 
     - include: zsh/zsh.yml
