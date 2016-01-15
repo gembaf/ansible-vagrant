@@ -23,5 +23,5 @@
 
     - include: vim/vim.yml
 
-    - include: zsh/playbook.yml
+    - include: zsh/zsh.yml
 
