@@ -13,7 +13,8 @@
 
     - include: git/git.yml
 
-    - include: redis/playbook.yml
+    - include: redis/redis.yml
+
     - include: ruby/playbook.yml
     - include: vim/playbook.yml
     - include: zsh/playbook.yml
