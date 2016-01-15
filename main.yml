@@ -11,7 +11,8 @@
     # - include: database/postgresql/postgresql.yml
     # - include: database/mysql/mysql.yml
 
-    - include: git/playbook.yml
+    - include: git/git.yml
+
     - include: redis/playbook.yml
     - include: ruby/playbook.yml
     - include: vim/playbook.yml
