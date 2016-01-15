@@ -5,11 +5,24 @@
   sudo: yes
   gather_facts: no
   tasks:
-    - include: apt/playbook.yml
-    - include: database/playbook.yml
-    - include: git/playbook.yml
-    - include: redis/playbook.yml
-    - include: ruby/playbook.yml
-    - include: vim/playbook.yml
-    - include: zsh/playbook.yml
+    - include: apt/apt.yml
+
+    - include: database/all.yml
+    # - include: database/postgresql/postgresql.yml
+    # - include: database/mysql/mysql.yml
+    # - include: database/redis/redis.yml
+
+    - include: git/git.yml
+
+    - include: ruby/ruby.yml
+    - include: ruby/gem/all.yml
+    # - include: ruby/gem/base.yml
+    # - include: ruby/gem/rails.yml
+    # - include: ruby/gem/rmagick.yml
+
+    # - include: rbenv/rbenv.yml
+
+    - include: vim/vim.yml
+
+    - include: zsh/zsh.yml
 

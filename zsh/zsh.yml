@@ -1,0 +1,41 @@
+# vim:ft=ansible:
+
+---
+- name: (zsh) exist check
+  shell: test -e /usr/local/src/zsh
+  register: exist_check
+  ignore_errors: yes
+
+- name: (zsh) git clone
+  git:
+    repo: 'https://github.com/zsh-users/zsh.git'
+    dest: /usr/local/src/zsh
+    version: zsh-5.0.8
+  when: exist_check|failed
+
+- name: (zsh) version check
+  shell: zsh --version | grep 5.0.8
+  register: version_check
+  ignore_errors: yes
+
+- name: (zsh) configure
+  shell: ./Util/preconfig
+         && ./configure
+  args:
+    chdir: /usr/local/src/zsh
+  when: version_check|failed
+
+- name: (zsh) make
+  shell: make
+  args:
+    chdir: /usr/local/src/zsh
+  when: version_check|failed
+
+- name: (zsh) make install
+  shell: make install.bin
+         && make install.modules
+         && make install.fns
+  args:
+    chdir: /usr/local/src/zsh
+  when: version_check|failed
+

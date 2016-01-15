@@ -1,20 +1,22 @@
 # vim:ft=ansible:
 
 ---
-- name: install postgresql
-  apt: name={{ item }} state=present
+- name: (psql) install postgresql
+  apt:
+    name: "{{ item }}"
+    state: present
   with_items:
     - libpq-dev
-    - postgresql  # 9.3.9
+    - postgresql
     - python-psycopg2
 
-- name: restarted postgresql
+- name: (psql) restart postgresql
   service:
-    name=postgresql
-    state=restarted
-    enabled=yes
+    name: postgresql
+    state: restarted
+    enabled: yes
 
-- name: create user
+- name: (psql) create user
   postgresql_user:
     name: vagrant
     role_attr_flags: CREATEDB
@@ -22,7 +24,7 @@
     login_user: postgres
   sudo_user: postgres
 
-- name: create database
+- name: (psql) create database
   postgresql_db:
     name: vagrant
     owner: vagrant

@@ -1,0 +1,45 @@
+# vim:ft=ansible:
+
+---
+- name: (mysql) install mysql
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libmysqlclient-dev
+    - mysql-server
+    - python-dev
+    - python-pip
+
+- name: (mysql) install pip modules
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - mysql-python
+
+- name: (mysql) backup original config file
+  command: cp /etc/mysql/my.cnf /etc/mysql/my.cnf.orig
+
+- name: (mysql) setting my config file
+  copy:
+    src: database/mysql/my.cnf.j2
+    dest: /etc/mysql/my.cnf
+
+- name: (mysql) restart mysql
+  service:
+    name: mysql
+    state: restarted
+    enabled: yes
+
+- name: (mysql) create user
+  mysql_user:
+    name: vagrant
+    password: ""
+    priv: "*.*:ALL"
+    state: present
+
+- name: (mysql) create database
+  mysql_db:
+    name: vagrant
+    state: present
+

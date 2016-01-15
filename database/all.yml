@@ -1,0 +1,6 @@
+# vim:ft=ansible:
+
+---
+- include: postgresql/postgresql.yml
+- include: mysql/mysql.yml
+

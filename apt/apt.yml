@@ -1,0 +1,23 @@
+# vim:ft=ansible:
+
+---
+- name: (apt) apt-get update & upgrade
+  apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: (apt) apt-get autoremove
+  command: apt-get -y autoremove
+
+- name: (apt) apt-get clean
+  command: apt-get -y clean
+
+- name: (apt) install base package
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - g++
+    - git
+    - language-pack-ja-base
+

@@ -1,0 +1,51 @@
+# vim:ft=ansible:
+
+---
+- name: (redis) exist check
+  shell: test -e /tmp/redis-2.8.19
+  register: exist_check
+  ignore_errors: yes
+
+- name: (redis) download file
+  get_url:
+    url: 'http://download.redis.io/releases/redis-2.8.19.tar.gz'
+    dest: /tmp/redis-2.8.19.tar.gz
+  when: exist_check|failed
+
+- name: (redis) unarchive
+  shell: tar zxvf redis-2.8.19.tar.gz
+  args:
+    chdir: /tmp/
+  when: exist_check|failed
+
+- name: (redis) version check
+  shell: redis-server --version | grep 2.8.19
+  register: version_check
+  ignore_errors: yes
+
+- name: (redis) make
+  shell: make
+  args:
+    chdir: /tmp/redis-2.8.19
+  when: version_check|failed
+
+- name: (redis) make install
+  shell: make install
+  args:
+    chdir: /tmp/redis-2.8.19
+  when: version_check|failed
+
+- name: (redis) setting config file
+  shell: cp /tmp/redis-2.8.19/redis.conf /etc/redis.conf
+  args:
+    creates: /etc/redis.conf
+
+- name: (redis) deamonize on
+  replace:
+    dest: /etc/redis.conf
+    regexp: 'daemonize no'
+    replace: 'daemonize yes'
+
+- name: (redis) start
+  shell: redis-server /etc/redis.conf
+

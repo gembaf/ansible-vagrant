@@ -1,0 +1,50 @@
+# vim:ft=ansible:
+
+---
+- name: (git) install dependent packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gettext
+    - libcurl4-gnutls-dev
+    - libexpat1-dev
+    - libssl-dev
+    - libz-dev
+
+- name: (git) exist check
+  shell: test -e /usr/local/src/git
+  register: exist_check
+  ignore_errors: yes
+
+- name: (git) git clone
+  git:
+    repo: 'https://github.com/git/git.git'
+    dest: /usr/local/src/git
+    version: v2.5.0
+  when: exist_check|failed
+
+- name: (git) uninstall old version
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - git
+
+- name: (git) version check
+  shell: git --version | grep 2.5.0
+  register: version_check
+  ignore_errors: yes
+
+- name: (git) compile
+  shell: make prefix=/usr/local all
+  args:
+    chdir: /usr/local/src/git
+  when: version_check|failed
+
+- name: (git) install
+  shell: make prefix=/usr/local install
+  args:
+    chdir: /usr/local/src/git
+  when: version_check|failed
+

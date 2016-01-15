@@ -1,0 +1,45 @@
+# vim:ft=ansible:
+
+---
+- name: (vim) exist check
+  shell: test -e /usr/local/src/vim
+  register: exist_check
+  ignore_errors: yes
+
+- name: (vim) git clone
+  git:
+    repo: 'https://github.com/vim/vim.git'
+    dest: /usr/local/src/vim
+    version: v7.4.1090
+  when: exist_check|failed
+
+- name: (vim) version check
+  shell: vim --version | grep 1-1090
+  register: version_check
+  ignore_errors: yes
+
+- name: (vim) configure
+  shell: ./configure --disable-gui
+  args:
+    chdir: /usr/local/src/vim
+  when: version_check|failed
+
+- name: (vim) make
+  shell: make
+  args:
+    chdir: /usr/local/src/vim
+  when: version_check|failed
+
+- name: (vim) make install
+  shell: make install
+  args:
+    chdir: /usr/local/src/vim
+  when: version_check|failed
+
+- name: (vim) uninstall old version
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - vim
+

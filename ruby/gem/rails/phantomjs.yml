@@ -1,0 +1,24 @@
+# vim:ft=ansible:
+
+---
+- name: (phantomjs) version check
+  shell: phantomjs --version | grep 2.0.1
+  register: version_check
+  ignore_errors: yes
+
+- name: (phantomjs) install dependent packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libicu52
+
+- name: (phantomjs) download binary
+  shell: curl --output /usr/local/bin/phantomjs-2.0.1-linux-x86_64-dynamic https://s3.amazonaws.com/circle-support-bucket/phantomjs/phantomjs-2.0.1-linux-x86_64-dynamic
+  when: version_check|failed
+
+- name: (phantomjs) create link
+  shell: chmod a+x /usr/local/bin/phantomjs-2.0.1-linux-x86_64-dynamic
+         && ln -s --force /usr/local/bin/phantomjs-2.0.1-linux-x86_64-dynamic /usr/local/bin/phantomjs
+  when: version_check|failed
+
