@@ -5,15 +5,14 @@
   sudo: yes
   gather_facts: no
   tasks:
-    - include: apt/playbook.yml
+    - include: apt/apt.yml
 
     - include: database/all.yml
     # - include: database/postgresql/postgresql.yml
     # - include: database/mysql/mysql.yml
+    # - include: database/redis/redis.yml
 
     - include: git/git.yml
-
-    - include: redis/redis.yml
 
     - include: ruby/ruby.yml
     - include: ruby/gem/all.yml
