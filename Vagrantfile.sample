@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = 'ubuntu/trusty64'
+  config.vm.hostname = 'ansible-test'
+  # config.vm.network 'forwarded_port', guest: 3000, host: 13001, id: 'http'
+  # config.vm.network 'forwarded_port', guest: 22, host: 2222, id: 'ssh'
+
+  config.vm.provider 'virtualbox' do |vb|
+    vb.memory = '2048'
+  end
+
+  config.vm.provision 'ansible' do |ansible|
+    ansible.playbook = 'ansible-vagrant/main.yml'
+  end
+end
+
