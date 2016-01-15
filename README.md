@@ -12,20 +12,13 @@ vagrantのセットアップ用のansible-playbook
 $ mkdir test
 $ cd test
 $ git clone https://github.com/gembaf/ansible-vagrant.git
-$ vagrant init ubuntu/trusty64
+$ vagrant init
 ```
 
-- Vagrantfileへの追記
+- Vagrantfileの上書き
 
-```ruby
-Vagrant.configure(2) do |config|
-
-  ……
-
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "ansible-vagrant/main.yml"
-  end
-end
+```sh
+$ cp ansible-vagrant/Vagrantfile.sample Vagrantfile
 ```
 
 - vagrantの起動
