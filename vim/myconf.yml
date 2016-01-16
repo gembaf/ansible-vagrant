@@ -1,0 +1,19 @@
+# vim:ft=ansible:
+
+---
+- name: (vimrc) exist check
+  shell: test -e /home/vagrant/.vim
+  register: exist_check
+  ignore_errors: yes
+
+- name: (vimrc) git clone
+  git:
+    repo: 'https://github.com/gembaf/vimrc.git'
+    dest: /home/vagrant/.vim
+  sudo: no
+  when: exist_check|failed
+
+- name: (vimrc) set my config
+  shell: bash /home/vagrant/.vim/init.sh
+  sudo: no
+

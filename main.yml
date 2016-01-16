@@ -23,6 +23,7 @@
     # - include: rbenv/rbenv.yml
 
     - include: vim/vim.yml
+    - include: vim/myconf.yml
 
     - include: zsh/zsh.yml
 
