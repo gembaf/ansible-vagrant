@@ -27,4 +27,5 @@
 
     - include: zsh/zsh.yml
     - include: zsh/myconf.yml
+    - include: zsh/dotfiles.yml
 

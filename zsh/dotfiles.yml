@@ -1,0 +1,19 @@
+# vim:ft=ansible:
+
+---
+- name: (dotfiles) exist check
+  shell: test -e /home/vagrant/.dotfiles
+  register: exist_check
+  ignore_errors: yes
+
+- name: (dotfiles) git clone
+  git:
+    repo: 'https://github.com/gembaf/.dotfiles.git'
+    dest: /home/vagrant/.dotfiles
+  sudo: no
+  when: exist_check|failed
+
+- name: (dotfiles) set my config
+  shell: bash /home/vagrant/.dotfiles/init.sh
+  sudo: no
+
