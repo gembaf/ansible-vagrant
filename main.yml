@@ -29,3 +29,5 @@
     - include: zsh/myconf.yml
     - include: zsh/dotfiles.yml
 
+    - include: etc/heroku.yml
+

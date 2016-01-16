@@ -1,0 +1,6 @@
+# vim:ft=ansible:
+
+---
+- name: (heroku) download & install
+  shell: wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
