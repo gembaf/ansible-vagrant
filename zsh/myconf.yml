@@ -1,0 +1,19 @@
+# vim:ft=ansible:
+
+---
+- name: (zshrc) exist check
+  shell: test -e /home/vagrant/.zsh
+  register: exist_check
+  ignore_errors: yes
+
+- name: (zshrc) git clone
+  git:
+    repo: 'https://github.com/gembaf/zshrc.git'
+    dest: /home/vagrant/.zsh
+  sudo: no
+  when: exist_check|failed
+
+- name: (zshrc) set my config
+  shell: bash /home/vagrant/.zsh/overwrite.sh
+  sudo: no
+

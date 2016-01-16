@@ -26,4 +26,5 @@
     - include: vim/myconf.yml
 
     - include: zsh/zsh.yml
+    - include: zsh/myconf.yml
 
