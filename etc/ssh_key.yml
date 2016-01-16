@@ -1,0 +1,15 @@
+# vim:ft=ansible:
+
+---
+- name: (ssh_key) copy id_rsa
+  copy:
+    src: ~/.ssh/id_rsa
+    dest: /home/vagrant/.ssh/id_rsa
+  sudo: no
+
+- name: (ssh_key) copy id_rsa.pub
+  copy:
+    src: ~/.ssh/id_rsa.pub
+    dest: /home/vagrant/.ssh/id_rsa.pub
+  sudo: no
+

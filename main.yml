@@ -30,4 +30,5 @@
     - include: zsh/dotfiles.yml
 
     - include: etc/heroku.yml
+    - include: etc/ssh_key.yml
 
